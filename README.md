@@ -25,10 +25,10 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 - Hash seguro de senha com bcryptjs
 - Validação de dados com Zod
 - CRUD completo de tarefas autenticadas
-
-## Funcionalidades pendentes
 - Proteção completa das rotas de tarefas
 - Interface frontend completa (login, registro e dashboard)
+
+## Funcionalidades pendentes
 - Testes automatizados
 - Documentação completa da API
 
@@ -61,8 +61,11 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 │   │   │       │   └── route.ts
 │   │   │       └── route.ts
 │   │   ├── dashboard
+│   │   │   └── page.tsx
 │   │   ├── login
+│   │   │   └── page.tsx
 │   │   ├── register
+│   │   │   └── page.tsx
 │   │   ├── favicon.ico
 │   │   ├── globals.css
 │   │   ├── layout.tsx
@@ -132,34 +135,36 @@ O banco foi modelado com Prisma para MySQL, com duas entidades principais:
 ## Endpoints implementados
 
 ### `POST /api/auth/register`
-Cria um novo usuário com validação de dados e hash da senha.
+- Cria um novo usuário com validação de dados e hash da senha.
+
+### `POST /api/auth/login`
+- Autentica um usuário e retorna um token JWT.
 
 > Todas as rotas de tarefas exigem autenticação via Bearer token no header `Authorization`.
 
 ### `GET /api/tasks`
-Lista todas as tarefas do usuário autenticado.
+- Lista todas as tarefas do usuário autenticado.
 
 ### `POST /api/tasks`
-Cria uma nova tarefa para o usuário autenticado.
+- Cria uma nova tarefa para o usuário autenticado.
 
 ### `PUT /api/tasks/[id]`
-Atualiza uma tarefa específica do usuário autenticado.
+- Atualiza uma tarefa específica do usuário autenticado.
 
 ### `DELETE /api/tasks/[id]`
-Remove uma tarefa específica do usuário autenticado.
+- Remove uma tarefa específica do usuário autenticado.
 
 ## Decisões técnicas
 - Prisma foi utilizado para acelerar a integração com MySQL e reduzir a complexidade de queries manuais.
 - Zod foi utilizado para validação de payloads.
 - JWT foi escolhido para autenticação stateless.
 - bcryptjs foi utilizado para armazenamento seguro de senhas.
+- Não foi utilizado nenhum componente ou frontend bem detalhado, o objetivo principal é entregar tudo que puder ser entregue no prazo.
 
 ## Limitações atuais
-Devido ao tempo disponível e ao escopo do desafio, a aplicação ainda não contempla todos os requisitos obrigatórios descritos no enunciado, especialmente no módulo de tarefas, testes automatizados e documentação da API.
+Devido ao tempo disponível e ao escopo do desafio, a aplicação ainda não contempla todos os requisitos obrigatórios descritos no enunciado, especialmente em testes automatizados e documentação da API.
 
 ## Próximos passos
-- Adicionar proteção de rotas por token
-- Criar dashboard frontend
 - Implementar testes de integração
 - Finalizar `API.md`
 
