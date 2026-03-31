@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod"
 
 /*
     ? Inserção de validações do registro do usuário
@@ -19,4 +19,4 @@ export const registerSchema = z.object({
         .string()
         .min(8, "A senha deve ter pelo menos 8 caractares"),
 
-});
+})
