@@ -1,36 +1,170 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Desafio técnico Full stack Hubfy.ai
 
-## Getting Started
+## Descrição 
 
-First, run the development server:
+Aplicação full stack de gerenciamento de tarefas desenvolvida como parte do desafio técnico da Hubfy.ai.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+O projeto foi construído com foco inicial na base da aplicação, incluindo configuração do ambiente, modelagem do banco de dados, autenticação de usuários e estruturação inicial da API.
+
+## Tecnologias utilizadas
+
+- Next.js 16+
+- React.js
+- TypeScript
+- Tailwind CSS
+- Prisma ORM
+- MySQL
+- Zod
+- JWT
+- bcryptjs
+
+## Funcionalidades implementadas
+
+- Configuração inicial do projeto com Next.js + TypeScript + Tailwind 
+- Integração com banco de dados MySQL via Prisma ORM
+- Modelagem das tabelas de usuários e tarefas
+- Endpoint de registro de usuários
+- Endpoint de login com autenticação JWT
+- Hash seguro de senha com bcryptjs
+- Validação de dados com Zod
+
+## Funcionalidades pendentes
+
+- CRUD completo de tarefas autenticadas
+- Proteção completa das rotas de tarefas
+- Interface frontend completa (login, registro e dashboard)
+- Testes automatizados
+- Documentação completa da API
+
+## Estrutura completa do projeto
+
+```
+├── database
+│   └── schema.sql
+├── prisma
+│   ├── migrations
+│   │   ├── 20260331133253_init
+│   │   │   └── migration.sql
+│   │   └── migration_lock.toml
+│   └── schema.prisma
+├── public
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── src
+│   ├── app
+│   │   ├── api
+│   │   │   ├── auth
+│   │   │   │   ├── login
+│   │   │   │   │   └── route.ts
+│   │   │   │   └── register
+│   │   │   │       └── route.ts
+│   │   │   └── tasks
+│   │   ├── dashboard
+│   │   ├── login
+│   │   ├── register
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   ├── generated
+│   ├── lib
+│   │   ├── auth.ts
+│   │   ├── db.ts
+│   │   ├── prisma.ts
+│   │   ├── proxy.ts
+│   │   └── validations.ts
+│   └── types
+├── tests
+│   ├── api
+│   │   ├── auth.test.ts
+│   │   └── tasks.test.ts
+│   └── components
+├── .gitignore
+├── API.md
+├── LICENSE
+├── README.md
+├── eslint.config.mjs
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── prisma.config.ts
+└── tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pré-requisitos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js 18+
+- MySQL 8+
+- npm / npx 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuração do ambiente
 
-## Learn More
+Crie um arquivo `.env` com base no `env.example`
 
-To learn more about Next.js, take a look at the following resources:
+### Exemplo:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+DATABASE_URL="mysql://usuario:senha@localhost:3306/desafio"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+DATABASE_HOST="localhost"
+DATABASE_PORT="3306"
+DATABASE_USER="usuario"
+DATABASE_PASSWORD="senha"
+DATABASE_NAME="desafio"
 
-## Deploy on Vercel
+JWT_SECRET="sua_chave_secreta"
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Instalação
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+npm install
+npx prisma generate
+npx prisma migrate dev --name init
+npm run dev
+```
+
+## Banco de dados
+
+O banco foi modelado com Prisma para MySQL, com duas entidades principais:
+- `Users`
+- `Tasks`
+
+## Endpoints implementados
+
+### `POST /api/auth/register`
+
+Cria um novo usuário com validação de dados e hash da senha.
+
+
+### `POST /api/auth/login`
+
+Autentica um usuário e retorna um token JWT.
+
+## Decisões técnicas
+
+- Prisma foi utilizado para acelerar a integração com MySQL e reduzir a complexidade de queries manuais.
+- Zod foi utilizado para validação de payloads.
+- JWT foi escolhido para autenticação stateless.
+- bcryptjs foi utilizado para armazenamento seguro de senhas.
+
+## Limitações atuais
+
+Devido ao tempo disponível e ao escopo do desafio, a aplicação ainda não contempla todos os requisitos obrigatórios descritos no enunciado, especialmente no módulo de tarefas, testes automatizados e documentação da API.
+
+## Próximos passos
+
+- Implementar CRUD completo de tarefas
+- Adicionar proteção de rotas por token
+- Criar dashboard frontend
+- Implementar testes de integração
+- Finalizar `API.md`
+
+# Autor
+
+> Yago Menezes
