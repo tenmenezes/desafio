@@ -24,9 +24,9 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 - Endpoint de login com autenticação JWT
 - Hash seguro de senha com bcryptjs
 - Validação de dados com Zod
+- CRUD completo de tarefas autenticadas
 
 ## Funcionalidades pendentes
-- CRUD completo de tarefas autenticadas
 - Proteção completa das rotas de tarefas
 - Interface frontend completa (login, registro e dashboard)
 - Testes automatizados
@@ -57,6 +57,9 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 │   │   │   │   └── register
 │   │   │   │       └── route.ts
 │   │   │   └── tasks
+│   │   │       ├── [id]
+│   │   │       │   └── route.ts
+│   │   │       └── route.ts
 │   │   ├── dashboard
 │   │   ├── login
 │   │   ├── register
@@ -69,6 +72,7 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 │   ├── lib
 │   │   ├── auth.ts
 │   │   ├── db.ts
+│   │   ├── get-auth-user.ts
 │   │   ├── prisma.ts
 │   │   ├── proxy.ts
 │   │   └── validations.ts
@@ -130,8 +134,19 @@ O banco foi modelado com Prisma para MySQL, com duas entidades principais:
 ### `POST /api/auth/register`
 Cria um novo usuário com validação de dados e hash da senha.
 
-### `POST /api/auth/login`
-Autentica um usuário e retorna um token JWT.
+> Todas as rotas de tarefas exigem autenticação via Bearer token no header `Authorization`.
+
+### `GET /api/tasks`
+Lista todas as tarefas do usuário autenticado.
+
+### `POST /api/tasks`
+Cria uma nova tarefa para o usuário autenticado.
+
+### `PUT /api/tasks/[id]`
+Atualiza uma tarefa específica do usuário autenticado.
+
+### `DELETE /api/tasks/[id]`
+Remove uma tarefa específica do usuário autenticado.
 
 ## Decisões técnicas
 - Prisma foi utilizado para acelerar a integração com MySQL e reduzir a complexidade de queries manuais.
@@ -143,7 +158,6 @@ Autentica um usuário e retorna um token JWT.
 Devido ao tempo disponível e ao escopo do desafio, a aplicação ainda não contempla todos os requisitos obrigatórios descritos no enunciado, especialmente no módulo de tarefas, testes automatizados e documentação da API.
 
 ## Próximos passos
-- Implementar CRUD completo de tarefas
 - Adicionar proteção de rotas por token
 - Criar dashboard frontend
 - Implementar testes de integração
