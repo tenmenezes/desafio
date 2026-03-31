@@ -61,7 +61,7 @@ export async function POST(request: Request) {
             { status: 200 }
         )
     } catch (error) {
-        console.error("ERRO_LOGIN: ", error)
+        console.error("ERROR_LOGIN: ", error)
 
         return NextResponse.json(
             { error: "Erro interno do servidor" },

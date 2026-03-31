@@ -1,13 +1,11 @@
 # Desafio técnico Full stack Hubfy.ai
 
 ## Descrição 
-
 Aplicação full stack de gerenciamento de tarefas desenvolvida como parte do desafio técnico da Hubfy.ai.
 
 O projeto foi construído com foco inicial na base da aplicação, incluindo configuração do ambiente, modelagem do banco de dados, autenticação de usuários e estruturação inicial da API.
 
 ## Tecnologias utilizadas
-
 - Next.js 16+
 - React.js
 - TypeScript
@@ -19,7 +17,6 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 - bcryptjs
 
 ## Funcionalidades implementadas
-
 - Configuração inicial do projeto com Next.js + TypeScript + Tailwind 
 - Integração com banco de dados MySQL via Prisma ORM
 - Modelagem das tabelas de usuários e tarefas
@@ -29,7 +26,6 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 - Validação de dados com Zod
 
 ## Funcionalidades pendentes
-
 - CRUD completo de tarefas autenticadas
 - Proteção completa das rotas de tarefas
 - Interface frontend completa (login, registro e dashboard)
@@ -37,7 +33,6 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 - Documentação completa da API
 
 ## Estrutura completa do projeto
-
 ```
 ├── database
 │   └── schema.sql
@@ -97,17 +92,14 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 ```
 
 ## Pré-requisitos
-
 - Node.js 18+
 - MySQL 8+
 - npm / npx 
 
 ## Configuração do ambiente
-
 Crie um arquivo `.env` com base no `env.example`
 
 ### Exemplo:
-
 ```
 DATABASE_URL="mysql://usuario:senha@localhost:3306/desafio"
 
@@ -121,7 +113,6 @@ JWT_SECRET="sua_chave_secreta"
 ```
 
 ## Instalação
-
 ```
 npm install
 npx prisma generate
@@ -130,7 +121,6 @@ npm run dev
 ```
 
 ## Banco de dados
-
 O banco foi modelado com Prisma para MySQL, com duas entidades principais:
 - `Users`
 - `Tasks`
@@ -138,27 +128,21 @@ O banco foi modelado com Prisma para MySQL, com duas entidades principais:
 ## Endpoints implementados
 
 ### `POST /api/auth/register`
-
 Cria um novo usuário com validação de dados e hash da senha.
 
-
 ### `POST /api/auth/login`
-
 Autentica um usuário e retorna um token JWT.
 
 ## Decisões técnicas
-
 - Prisma foi utilizado para acelerar a integração com MySQL e reduzir a complexidade de queries manuais.
 - Zod foi utilizado para validação de payloads.
 - JWT foi escolhido para autenticação stateless.
 - bcryptjs foi utilizado para armazenamento seguro de senhas.
 
 ## Limitações atuais
-
 Devido ao tempo disponível e ao escopo do desafio, a aplicação ainda não contempla todos os requisitos obrigatórios descritos no enunciado, especialmente no módulo de tarefas, testes automatizados e documentação da API.
 
 ## Próximos passos
-
 - Implementar CRUD completo de tarefas
 - Adicionar proteção de rotas por token
 - Criar dashboard frontend

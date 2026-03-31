@@ -58,7 +58,7 @@ export async function POST(request: Request) {
         )
 
     } catch (error) {
-        console.error("ERRO_REGISTRO:", error)
+        console.error("ERROR_REGISTER:", error)
 
         return NextResponse.json(
             { error: "Erro interno do sevidor" },
