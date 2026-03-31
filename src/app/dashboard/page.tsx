@@ -1,5 +1,5 @@
-export default function Dashboard() {
+export default function DashboardPage() {
     return (
-        <div></div>
+        <h1>Tela de dashboard do usuário</h1>
     );
 }
