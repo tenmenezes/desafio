@@ -140,12 +140,14 @@ Crie um arquivo `.env` com base no `.env.example`
 ### Exemplo:
 
 ```
-DATABASE_URL="mysql://usuario:senha@localhost:3306/desafio"
+# Exemplo para rodar a aplicação via docker compose
 
-DATABASE_HOST="localhost"
+DATABASE_URL="mysql://root:root@db:3306/desafio"
+
+DATABASE_HOST="db"
 DATABASE_PORT="3306"
-DATABASE_USER="usuario"
-DATABASE_PASSWORD="senha"
+DATABASE_USER="root"
+DATABASE_PASSWORD="root"
 DATABASE_NAME="desafio"
 
 JWT_SECRET="sua_chave_secreta"
