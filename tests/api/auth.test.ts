@@ -6,6 +6,11 @@
     ? apresentado na documentação.
 */
 
+import bcrypt from "bcryptjs";
+import { prisma } from "@/lib/prisma";
+import { POST as loginPOST } from "@/app/api/auth/login/route";
+import { POST as registerPOST } from "@/app/api/auth/register/route";
+
 jest.mock("@/lib/prisma", () => ({
     prisma: {
         user: {
@@ -14,11 +19,6 @@ jest.mock("@/lib/prisma", () => ({
         },
     },
 }));
-
-import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/prisma";
-import { POST as loginPOST } from "@/app/api/auth/login/route";
-import { POST as registerPOST } from "@/app/api/auth/register/route";
 
 const mockedPrisma = prisma as unknown as {
     user: {
