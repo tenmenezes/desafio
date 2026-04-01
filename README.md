@@ -111,6 +111,29 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 - MySQL 8+
 - npm / npx 
 
+### Execução com docker
+- Docker Engine ou Docker Desktop
+- Docker compose plugin (`docker compose`)
+
+### Executando com Docker Compose
+
+Para subir a aplicação e o banco com docker compose:
+
+```bash
+docker compose up --build
+```
+A aplicação ficará disponível em:
+
+```bash
+http://localhost:3000
+```
+
+Se o MySQL local já estiver rodando na porta 3306, utilize outra porta no `docker-compose.yml`, por exemplo:
+
+```bash
+port: 3307:3306
+```
+
 ## Configuração do ambiente
 Crie um arquivo `.env` com base no `.env.example`
 
