@@ -32,6 +32,7 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 - Proteção completa das rotas de tarefas
 - Interface frontend completa (login, registro e dashboard)
 - Testes automatizados
+- Implementação do Docker compose para fácil acesso em máquinas externas
 
 ## Funcionalidades pendentes
 
@@ -87,10 +88,14 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 │   └── api
 │       ├── auth.test.ts
 │       └── tasks.test.ts
+├── .dockerignore
+├── .env.example
 ├── .gitignore
 ├── API.md
+├── Dockerfile
 ├── LICENSE
 ├── README.md
+├── docker-compose.yml
 ├── eslint.config.mjs
 ├── jest.config.ts
 ├── next.config.ts
