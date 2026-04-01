@@ -1,11 +1,13 @@
 # Desafio técnico Full stack Hubfy.ai
 
 ## Descrição 
+
 Aplicação full stack de gerenciamento de tarefas desenvolvida como parte do desafio técnico da Hubfy.ai.
 
 O projeto foi construído com foco inicial na base da aplicação, incluindo configuração do ambiente, modelagem do banco de dados, autenticação de usuários e estruturação inicial da API.
 
 ## Tecnologias utilizadas
+
 - Next.js 16+
 - React.js
 - TypeScript
@@ -15,8 +17,10 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 - Zod
 - JWT
 - bcryptjs
+- Jest
 
 ## Funcionalidades implementadas
+
 - Configuração inicial do projeto com Next.js + TypeScript + Tailwind 
 - Integração com banco de dados MySQL via Prisma ORM
 - Modelagem das tabelas de usuários e tarefas
@@ -27,14 +31,18 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 - CRUD completo de tarefas autenticadas
 - Proteção completa das rotas de tarefas
 - Interface frontend completa (login, registro e dashboard)
+- Testes automatizados
 
 ## Funcionalidades pendentes
-- Testes automatizados
-- Expandir a cobertura de testes do frontend
-- Extras
+
+- Refinamento da UX/UI no frontend
+- Adição de filtros e experiência do usuário no dashboard
 
 ## Estrutura completa do projeto
 ```
+├── .swc
+│   └── plugins
+│       └── linux_x86_64_24.0.0
 ├── database
 │   └── schema.sql
 ├── prisma
@@ -43,12 +51,6 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 │   │   │   └── migration.sql
 │   │   └── migration_lock.toml
 │   └── schema.prisma
-├── public
-│   ├── file.svg
-│   ├── globe.svg
-│   ├── next.svg
-│   ├── vercel.svg
-│   └── window.svg
 ├── src
 │   ├── app
 │   │   ├── api
@@ -72,25 +74,25 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── components
+│   │   ├── DashboardComponent.tsx
+│   │   ├── LoginComponent.tsx
+│   │   └── RegisterComponent.tsx
 │   ├── generated
-│   ├── lib
-│   │   ├── auth.ts
-│   │   ├── db.ts
-│   │   ├── get-auth-user.ts
-│   │   ├── prisma.ts
-│   │   ├── proxy.ts
-│   │   └── validations.ts
-│   └── types
+│   └── lib
+│       ├── auth.ts
+│       ├── get-auth-user.ts
+│       ├── prisma.ts
+│       └── validations.ts
 ├── tests
-│   ├── api
-│   │   ├── auth.test.ts
-│   │   └── tasks.test.ts
-│   └── components
+│   └── api
+│       ├── auth.test.ts
+│       └── tasks.test.ts
 ├── .gitignore
 ├── API.md
 ├── LICENSE
 ├── README.md
 ├── eslint.config.mjs
+├── jest.config.ts
 ├── next.config.ts
 ├── package-lock.json
 ├── package.json
@@ -108,6 +110,7 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 Crie um arquivo `.env` com base no `.env.example`
 
 ### Exemplo:
+
 ```
 DATABASE_URL="mysql://usuario:senha@localhost:3306/desafio"
 
@@ -121,7 +124,8 @@ JWT_SECRET="sua_chave_secreta"
 ```
 
 ## Instalação
-```
+
+```bash
 npm install
 npx prisma generate
 npx prisma migrate dev --name init
@@ -129,9 +133,14 @@ npm run dev
 ```
 
 ## Banco de dados
+
 O banco foi modelado com Prisma para MySQL, com duas entidades principais:
+
 - `Users`
 - `Tasks`
+
+O arquivo SQL de criação do schema está em:
+- `database/ schema.sql`
 
 ## Endpoints implementados
 
@@ -141,7 +150,7 @@ O banco foi modelado com Prisma para MySQL, com duas entidades principais:
 ### `POST /api/auth/login`
 - Autentica um usuário e retorna um token JWT.
 
-> Todas as rotas de tarefas exigem autenticação via Bearer token no header `Authorization`.
+## Todas as rotas de tarefas exigem autenticação via Bearer token no header `Authorization`.
 
 ### `GET /api/tasks`
 - Lista todas as tarefas do usuário autenticado.
@@ -155,24 +164,36 @@ O banco foi modelado com Prisma para MySQL, com duas entidades principais:
 ### `DELETE /api/tasks/[id]`
 - Remove uma tarefa específica do usuário autenticado.
 
-> Documentação completa em [APIs](./API.md)
+### Documentação completa em [API Doc](./API.md)
+
+## Testes
+
+Para executar os testes automatizados:
+
+```bash
+npm test
+```
 
 ## Decisões técnicas
+
 - Prisma foi utilizado para acelerar a integração com MySQL e reduzir a complexidade de queries manuais.
 - Zod foi utilizado para validação de payloads.
 - JWT foi escolhido para autenticação stateless.
 - bcryptjs foi utilizado para armazenamento seguro de senhas.
+- Os testes automatizados foram implementados com Jest para validar os principais fluxos da API
 - A interface foi mantida simples e funcional, priorizando a implementação completa dos requisitos obrigatórios dentro do prazo disponível.
 
 ## Limitações atuais
-- A aplicação ainda não contempla testes automatizados.
+
+- Os testes implementados estão concentrados nos fluxos principais da API.
 - A interface foi construída com foco funcional, priorizando os requisitos obrigatórios do desafio.
 
 ## Próximos passos
-- Implementar testes de integração
-- Expandir a cobertura de testes do frontend
-- Extras
+
+- Expandir a cobertura de testes
+- Refinar UX/UI no frontend
+- Adicionar filtros no dashboard e opções de melhorias extras na aplicação
 
 # Autor
 
-> Yago Menezes
+### Yago Menezes
