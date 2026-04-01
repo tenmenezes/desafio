@@ -30,7 +30,8 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 
 ## Funcionalidades pendentes
 - Testes automatizados
-- Documentação completa da API
+- Expandir a cobertura de testes do frontend
+- Extras
 
 ## Estrutura completa do projeto
 ```
@@ -104,7 +105,7 @@ O projeto foi construído com foco inicial na base da aplicação, incluindo con
 - npm / npx 
 
 ## Configuração do ambiente
-Crie um arquivo `.env` com base no `env.example`
+Crie um arquivo `.env` com base no `.env.example`
 
 ### Exemplo:
 ```
@@ -154,19 +155,23 @@ O banco foi modelado com Prisma para MySQL, com duas entidades principais:
 ### `DELETE /api/tasks/[id]`
 - Remove uma tarefa específica do usuário autenticado.
 
+> Documentação completa em [APIs](./API.md)
+
 ## Decisões técnicas
 - Prisma foi utilizado para acelerar a integração com MySQL e reduzir a complexidade de queries manuais.
 - Zod foi utilizado para validação de payloads.
 - JWT foi escolhido para autenticação stateless.
 - bcryptjs foi utilizado para armazenamento seguro de senhas.
-- Não foi utilizado nenhum componente ou frontend bem detalhado, o objetivo principal é entregar tudo que puder ser entregue no prazo.
+- A interface foi mantida simples e funcional, priorizando a implementação completa dos requisitos obrigatórios dentro do prazo disponível.
 
 ## Limitações atuais
-Devido ao tempo disponível e ao escopo do desafio, a aplicação ainda não contempla todos os requisitos obrigatórios descritos no enunciado, especialmente em testes automatizados e documentação da API.
+- A aplicação ainda não contempla testes automatizados.
+- A interface foi construída com foco funcional, priorizando os requisitos obrigatórios do desafio.
 
 ## Próximos passos
 - Implementar testes de integração
-- Finalizar `API.md`
+- Expandir a cobertura de testes do frontend
+- Extras
 
 # Autor
 
