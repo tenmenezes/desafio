@@ -84,7 +84,7 @@ export default function LoginComponent() {
 
                     <div className="text-black flex flex-row gap-2 justify-end">
                         <p>Não tem conta?</p>
-                        <Link className="text-blue-600 hover:underline" href="./register">cadastrar-se</Link>
+                        <Link className="text-blue-600 hover:underline" href="./register">Cadastrar-se</Link>
                     </div>
 
                     {error && (

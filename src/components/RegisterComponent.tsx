@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { getPasswordStrength } from "@/lib/password-strength";
 
 export default function RegisterComponent() {
     const router = useRouter()
@@ -11,22 +12,24 @@ export default function RegisterComponent() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-    
+
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
+
+    const passwordStrength = getPasswordStrength(password)
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
         setError("")
 
-        if(password !== confirmPassword) {
+        if (password !== confirmPassword) {
             setError("As senhas não coincidem.")
             return
         }
 
         try {
-            
+
             setLoading(true)
 
             const response = await fetch("/api/auth/register", {
@@ -43,7 +46,7 @@ export default function RegisterComponent() {
 
             const data = await response.json()
 
-            if(!response.ok) {
+            if (!response.ok) {
                 setError(data.error || "Erro ao registrar usuário.")
                 return
             }
@@ -66,54 +69,69 @@ export default function RegisterComponent() {
                     <div>
                         <label className="mb-1 block text-sm font-medium text-black/60">Nome *</label>
                         <input
-                         type="text"
-                         value={name}
-                         onChange={(e) => setName(e.target.value)}
-                         className="w-full rounded border px-3 py-2 text-black placeholder:text-gray-400"
-                         placeholder="Digite seu nome" 
-                         required
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className="w-full rounded border px-3 py-2 text-black placeholder:text-gray-400"
+                            placeholder="Digite seu nome"
+                            required
                         />
                     </div>
 
                     <div>
                         <label className="mb-1 block text-sm font-medium text-black/60">Email *</label>
                         <input
-                         type="email"
-                         value={email}
-                         onChange={(e) => setEmail(e.target.value)}
-                         className="w-full rounded border px-3 py-2 text-black placeholder:text-gray-400"
-                         placeholder="seu@email.com" 
-                         required
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full rounded border px-3 py-2 text-black placeholder:text-gray-400"
+                            placeholder="seu@email.com"
+                            required
                         />
                     </div>
 
                     <div>
                         <label className="mb-1 block text-sm font-medium text-black/60">Senha *</label>
                         <input
-                         type="password"
-                         value={password}
-                         onChange={(e) => setPassword(e.target.value)}
-                         className="w-full rounded border px-3 py-2 text-black placeholder:text-gray-400"
-                         placeholder="**********" 
-                         required
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full rounded border px-3 py-2 text-black placeholder:text-gray-400"
+                            placeholder="**********"
+                            required
                         />
+
+                        {password && (
+                            <div className="mt-2">
+                                <div className="h-2 w-full rounded bg-gray-200">
+                                    <div
+                                        className={`h-2 rounded transition-all ${passwordStrength.color}`}
+                                        style={{ width: passwordStrength.width }}
+                                    />
+                                </div>
+                                <p className="mt-1 text-sm text-gray-600">
+                                    Força da senha: <span className="font-medium">{passwordStrength.label}</span>
+                                </p>
+                            </div>
+                        )}
+
                     </div>
 
                     <div>
                         <label className="mb-1 block text-sm font-medium text-black/60">Confirme sua senha *</label>
                         <input
-                         type="password"
-                         value={confirmPassword}
-                         onChange={(e) => setConfirmPassword(e.target.value)}
-                         className="w-full rounded border px-3 py-2 text-black placeholder:text-gray-400"
-                         placeholder="***********" 
-                         required
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            className="w-full rounded border px-3 py-2 text-black placeholder:text-gray-400"
+                            placeholder="***********"
+                            required
                         />
                     </div>
 
                     <div className="text-black flex flex-row gap-2 justify-end">
                         <p>Já tem conta?</p>
-                        <Link className="text-blue-600 hover:underline" href="./login">logar</Link>
+                        <Link className="text-blue-600 hover:underline" href="./login">Logar</Link>
                     </div>
 
                     {error && (

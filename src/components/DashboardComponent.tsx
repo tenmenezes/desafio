@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Pencil, Trash } from "lucide-react";
+import { boolean } from "zod";
 
 type Task = {
     id: number
@@ -32,6 +33,32 @@ export default function DashboardComponent() {
         statusFilter === "all"
             ? tasks
             : tasks.filter((task) => task.status === statusFilter)
+
+    const [toast, setToast] = useState<{
+        show: boolean;
+        message: string;
+        type: "success" | "error";
+    }>({
+        show: false,
+        message: "",
+        type: "success",
+    });
+
+    function showToast(message: string, type: "success" | "error" = "success") {
+        setToast({
+            show: true,
+            message,
+            type,
+        });
+
+        setTimeout(() => {
+            setToast({
+                show: false,
+                message: "",
+                type: "success",
+            });
+        }, 3000);
+    }
 
     async function loadTasks() {
         const token = localStorage.getItem("token")
@@ -111,12 +138,19 @@ export default function DashboardComponent() {
                 return
             }
 
+            if (editingTaskId) {
+                showToast("Tarefa atualizada com sucesso!")
+            } else {
+                showToast("Tarefa criada com sucesso!")
+            }
+
             setTitle("")
             setDescription("")
             setStatus("pending")
             setEditingTaskId(null)
 
             await loadTasks()
+
 
         } catch (error) {
             console.error(error)
@@ -169,6 +203,8 @@ export default function DashboardComponent() {
 
             await loadTasks();
 
+            showToast("Tarefa deletada com sucesso!");
+
         } catch (error) {
             console.error(error);
             setError("Erro inesperado ao deletar tarefa.");
@@ -176,7 +212,7 @@ export default function DashboardComponent() {
 
     }
 
-    function hadleLogout() {
+    function handleLogout() {
         localStorage.removeItem("token")
         localStorage.removeItem("user")
         router.push("/login")
@@ -184,6 +220,16 @@ export default function DashboardComponent() {
 
     return (
         <main className="min-h-screen bg-gray-100 px-4 py-8">
+            {toast.show && (
+                <div className="fixed right-4 top-4 z-50">
+                    <div
+                        className={`rounded px-4 py-3 text-white shadow-lg ${toast.type === "success" ? "bg-green-600" : "bg-red-600"
+                            }`}
+                    >
+                        {toast.message}
+                    </div>
+                </div>
+            )}
             <div className="mx-auto max-w-3xl">
                 <div className="mb-6 flex items-center justify-between">
                     <h1 className="text-2xl font-bold text-black/80">
@@ -191,7 +237,7 @@ export default function DashboardComponent() {
                     </h1>
                     <button
                         type="button"
-                        onClick={hadleLogout}
+                        onClick={handleLogout}
                         className="cursor-pointer m-2 rounded bg-black px-4 py-2 text-white transition hover:bg-red-800"
                     >
                         Sair
