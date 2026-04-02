@@ -24,8 +24,14 @@ export default function DashboardComponent() {
     const [description, setDescription] = useState("")
     const [status, setStatus] = useState<"pending" | "in_progress" | "completed">("pending")
     const [creating, setCreating] = useState(false)
+    const [statusFilter, setStatusFilter] = useState<"all" | "pending" | "in_progress" | "completed">("all")
 
     const [editingTaskId, setEditingTaskId] = useState<number | null>(null)
+
+    const filteredTasks =
+        statusFilter === "all"
+            ? tasks
+            : tasks.filter((task) => task.status === statusFilter)
 
     async function loadTasks() {
         const token = localStorage.getItem("token")
@@ -73,7 +79,7 @@ export default function DashboardComponent() {
 
         const token = localStorage.getItem("token")
 
-        const endpoint = editingTaskId ? `/api/tasks/${editingTaskId}` : "api/tasks"
+        const endpoint = editingTaskId ? `/api/tasks/${editingTaskId}` : "/api/tasks"
         const method = editingTaskId ? "PUT" : "POST"
 
         if (!token) {
@@ -179,7 +185,7 @@ export default function DashboardComponent() {
     return (
         <main className="min-h-screen bg-gray-100 px-4 py-8">
             <div className="mx-auto max-w-3xl">
-                <div className="mbb-6 flex items-center justify-between">
+                <div className="mb-6 flex items-center justify-between">
                     <h1 className="text-2xl font-bold text-black/80">
                         Dashboard
                     </h1>
@@ -193,7 +199,27 @@ export default function DashboardComponent() {
                 </div>
 
                 <div className="mb-6 rounded bg-white p-6 shadow">
-                    <h2 className="mb-4 text-lg font-semibold text-black">
+
+                    <label className="mb-2 block text-sm font-medium text-black/60">
+                        Filtrar por status
+                    </label>
+
+                    <select
+                        value={statusFilter}
+                        onChange={(e) =>
+                            setStatusFilter(
+                                e.target.value as "all" | "pending" | "in_progress" | "completed"
+                            )
+                        }
+                        className="w-full rounded border px-3 py-2 text-black"
+                    >
+                        <option value="all">Todos</option>
+                        <option value="pending">Pendente</option>
+                        <option value="in_progress">Em progresso</option>
+                        <option value="completed">Concluído</option>
+                    </select>
+
+                    <h2 className="mb-4 mt-4 text-lg font-semibold text-black">
                         {editingTaskId ? "Editar tarefa" : "Nova Tarefa"}
                     </h2>
 
@@ -227,7 +253,7 @@ export default function DashboardComponent() {
 
                         <div>
                             <label className="mb-1 block text-sm font-medium text-black/60">
-                                Título *
+                                Status *
                             </label>
                             <select
                                 className="w-full rounded border px-3 py-2 text-black"
@@ -285,9 +311,15 @@ export default function DashboardComponent() {
                     </div>
                 )}
 
+                {!loading && !error && filteredTasks.length === 0 && (
+                    <div className="rounded bg-white p-6 shadow">
+                        <p className="text-red-800">Nenhuma tarefa encontrada para esse filtro.</p>
+                    </div>
+                )}
+
                 {!loading && !error && tasks.length > 0 && (
-                    <div className="sppace-y-4">
-                        {tasks.map((task) => (
+                    <div className="space-y-4">
+                        {filteredTasks.map((task) => (
                             <div key={task.id} className="rounded border bg-white p-4 shadow">
                                 <div className="flex justify-between items-center gap-2 ">
                                     <div className="mb-2 flex items-start justify-between gap-4">

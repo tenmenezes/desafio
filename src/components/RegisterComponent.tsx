@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function RegisterComponent() {
     const router = useRouter()
@@ -108,6 +109,11 @@ export default function RegisterComponent() {
                          placeholder="***********" 
                          required
                         />
+                    </div>
+
+                    <div className="text-black flex flex-row gap-2 justify-end">
+                        <p>Já tem conta?</p>
+                        <Link className="text-blue-600 hover:underline" href="./login">logar</Link>
                     </div>
 
                     {error && (

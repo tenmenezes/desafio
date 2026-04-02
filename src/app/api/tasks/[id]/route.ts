@@ -11,10 +11,10 @@ type RouteContext = {
     }>
 }
 
-export async function PUT(request: Request, conext: RouteContext) {
+export async function PUT(request: Request, context: RouteContext) {
     try {
         const authUser = getAuthUserFromRequest(request)
-        const { id } = await conext.params
+        const { id } = await context.params
         const taskId = Number(id)
 
         if (Number.isNaN(taskId)) {
@@ -78,10 +78,10 @@ export async function PUT(request: Request, conext: RouteContext) {
     }
 }
 
-export async function DELETE(request: Request, conext: RouteContext) {
+export async function DELETE(request: Request, context: RouteContext) {
     try {
         const authUser = getAuthUserFromRequest(request)
-        const { id } = await conext.params
+        const { id } = await context.params
         const taskId = Number(id)
 
         if (Number.isNaN(taskId)) {
