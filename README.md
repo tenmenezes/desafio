@@ -211,6 +211,8 @@ npm test
 - JWT foi escolhido para autenticação stateless.
 - bcryptjs foi utilizado para armazenamento seguro de senhas.
 - Os testes automatizados foram implementados com Jest para validar os principais fluxos da API
+- Adição do proxy.ts para que usuário já logado não volte para /login e /register
+- implementando UX visual de senha forte em tempo real e toast de respostas de sucesso das tarefas
 - A interface foi mantida simples e funcional, priorizando a implementação completa dos requisitos obrigatórios dentro do prazo disponível.
 
 ## Limitações atuais
