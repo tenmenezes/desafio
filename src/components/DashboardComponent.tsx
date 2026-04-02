@@ -294,7 +294,7 @@ export default function DashboardComponent() {
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                                 className="w-full rounded border px-3 py-2 text-black placeholder:text-gray-500"
-                                placeholder="Digite o título da tarefa"
+                                placeholder="Digite a descrição da tarefa"
                             />
                         </div>
 
