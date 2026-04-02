@@ -71,7 +71,7 @@ Autentica um usuário e retorna um token JWT
 }
 ```
 
-### Resposta de sucesso - `201`
+### Resposta de sucesso - `200`
 
 ```json
 {
@@ -102,7 +102,7 @@ Lista todas as tarefas do usuário autenticado.
 ### Headers
 - `Authorization: Bearer {token}`
 
-### Resposta de sucesso - 201
+### Resposta de sucesso - 200
 
 ```json
 {
