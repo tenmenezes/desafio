@@ -49,7 +49,7 @@ export async function POST(request: Request) {
             email: user.email,
         })
 
-        return NextResponse.json(
+        const response = NextResponse.json(
             {
                 token,
                 user: {
@@ -60,6 +60,17 @@ export async function POST(request: Request) {
             },
             { status: 200 }
         )
+
+        response.cookies.set("token", token, {
+            httpOnly: false,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            path: "/",
+            maxAge: 60 * 60 * 24,
+        })
+
+        return response
+
     } catch (error) {
         console.error("ERROR_LOGIN: ", error)
 
